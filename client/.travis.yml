@@ -12,12 +12,12 @@ script:
     - docker run -e CI=true pawel970/react-test npm test
 
 after_success:
-    - docker build pawel970/mulit-client -f ./client
-    - docker build pawel970/mulit-nginx -f ./nginx
-    - docker build pawel970/mulit-server -f ./server
-    - docker build pawel970/mulit-worker -f ./worker
+    - docker build -t pawel970/mulit-client -f ./client
+    - docker build -t pawel970/mulit-nginx -f ./nginx
+    - docker build -t pawel970/mulit-server -f ./server
+    - docker build -t pawel970/mulit-worker -f ./worker
     # log in to the docker cli
-    - echo "$DOCKER_PASSWORD" | docker login -u "#DOCKER_ID" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # take those images and push them to docker hub
     - docker push pawel970/mulit-client
     - docker push pawel970/mulit-nginx
